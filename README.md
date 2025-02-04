@@ -18,3 +18,9 @@ MongoDb, nodeJS, express, react
 - Used MongoDBAtlas to create a cluster
 - Used mongoose to connect MongoDb with the backend
 - Made some error-handling changes
+
+## Milestone-4
+
+- Installed JSON token
+- Created the Multer file
+
