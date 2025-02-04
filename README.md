@@ -14,4 +14,3 @@ MongoDb, nodeJS, express, react
 ## Milestone 3:
 
 - Worked on Home Page.
-- Used React-Router-Dom.
