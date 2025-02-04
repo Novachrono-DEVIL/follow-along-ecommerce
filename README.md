@@ -11,6 +11,10 @@ MongoDb, nodeJS, express, react
 - Structure of react.
 - Using Tailwind css.
 - Used React-Dom
-## Milestone 3:
 
-- Worked on Home Page.
+## Milestone-3
+
+- Implemented Express on the backend
+- Used MongoDBAtlas to create a cluster
+- Used mongoose to connect MongoDb with the backend
+- Made some error-handling changes
