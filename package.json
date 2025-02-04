@@ -1,18 +1,20 @@
 {
+  "name": "fa-eshop",
+  "version": "1.0.0",
+  "main": "./backend/server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon backend/server.js"
+  },
+  "author": "",
+  "license": "ISC",
   "dependencies": {
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
+    "mongodb": "^6.13.0",
     "mongoose": "^8.9.6",
     "nodemon": "^3.1.9"
   },
-  "name": "follow-along-ecommerce",
-  "version": "1.0.0",
-  "description": "Got overview of the e-commerce project Tech Stack\r MongoDb, nodeJS, express, react",
-  "main": "index.js",
   "devDependencies": {},
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "author": "",
-  "license": "ISC"
+  "description": ""
 }
