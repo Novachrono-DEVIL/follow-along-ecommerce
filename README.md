@@ -24,3 +24,11 @@ MongoDb, nodeJS, express, react
 - Installed JSON token
 - Created the Multer file
 
+## Milestone-5
+
+- Created the SignUp page
+- Used Tailwind css
+
+## Milestone-6
+
+
