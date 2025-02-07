@@ -1,19 +1,17 @@
 const multer = require('multer')
+const path = require('path');  // Import the path module
 
 const storage = multer.diskStorage({
-destination:(req,file,cb)=>{
-cb(null,'upload/')
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        const uniSuffix = Date.now() + Math.round(Math.random() * 1e9);
+        const fileName = file.originalname.split('.')[0];  // Get the base name of the file
+        const fileExtension = path.extname(file.originalname);  // Get the file extension
+        cb(null, uniSuffix + fileName + fileExtension);  // Preserve original extension
+    }
+});
 
-},
-filename:(req,file,cb)=>{
-    const uniqueSuffix = Date.now()+RunCommandCursor(Math.random()*1e9)
-    const filename = file.originalname.split('.')[0]
-    cb(null,filename+uniqueSuffix+'.png')
-
-}
-
-
-})
-
-const upload = multer({storage:storage})
-module.exports=upload
+const upload = multer({ storage: storage });
+module.exports={upload};

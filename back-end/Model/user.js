@@ -1,39 +1,48 @@
-const mongoose = require('mongoose')
-const bcrypt = require('bcryptjs')
+const mongoose=require('mongoose')
 const jwt=require('jsonwebtoken')
+const bcrypt=require('bcryptjs')
 
-const userSchema = mongoose.Schema({
-    name:{type:String,required:true},
+
+const userSchema = new mongoose.Schema({
+    name:{type:String , required:true},
     email:{type:String,required:true},
+    password:{type:String,required:true,minLength:4},
     phoneNumber:{type:Number},
-    password: {type:String,required:true,minLength:5},
-    confirmPassword: {type:String,required:true},
-    avartar:{
-        id:{type:String},
-        url:{type:String}
-    },
     address:[
-        {
-            country:{type:String ,required:true},
-            city:{type:String},
-            address1:{type:String},
-            address2:{type:String},
-            pincode:{type:Number,required:true}
-        }
+{
+    country:{type:String},
+    city:{type:String},
+    address1:{type:String},
+    address2:{type:String},
+    zipcode:{type:Number},
+    addressType:{type:String}
+}
     ],
-    role:{type:String,default:user},
-    createdAt:{type:Date,default:Date.now()}
+    role:{type:String,default:'user'},
+avatar:{
+    id:{type:String},
+    url:{type:String}
+},
+cretedAt:{type:Date,default:Date.now()}
 
 })
+
+
 
 userSchema.pre('save',async function(next){
-    if(!this.isModified('password')){
-       return next()
-    }
-    await bcrypt.hash(this.password,12)
-    next()
-})
-
-userSchema.methods.jsonToken= function(){
-    return JsonWebTokenError.sign({id:this._id},process.env.JWT_TOKEN,{expiresIn:process.env.JWT_EXPIRES})
+if(!this.isModified("password")){
+    return next()
 }
+this.password= await bcrypt.hash(this.password,10)
+
+})
+userSchema.methods.getJwtToken=function(){
+    return jwt.sign({id:this._id} ,process.env.JWT_TOKEN, {expiration:process.env.JWT_EXPIRES})
+}
+
+userSchema.methods.comparePassword=async function(enterPassword){
+ return await bcrypt.compare(enterPassword,this.Password)   
+}
+
+
+module.exports=mongoose.model('User',userSchema)
