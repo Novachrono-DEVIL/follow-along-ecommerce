@@ -8,7 +8,7 @@ const ErrorHandler = require('../utils/ErrorHandler');
 const router = express.Router();
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
-    const { name, email, password } = req.body;
+    try{const { name, email, password } = req.body;
 
     // Check if the user already exists
     const userEmail = await User.findOne({ email });
@@ -39,7 +39,7 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
     });
     console.log(user)
 
-     try {
+     
          // Save the new user to the database
          await user.save()
          // Return a success response
@@ -48,5 +48,26 @@ router.post("/create-user", upload.single("file"), async (req, res, next) => {
          return next(new ErrorHandler(error.message, 500));
      }
 });
+
+router.post('/login',async(req,res,next)=>{
+  try { const {email,password}=req.body
+    if(!email || !password)
+        return next(new ErrorHandler("all fields are  required",400))
+
+    const user = await User.findOne({email}).select('password')
+    if(!user)
+        return next(new ErrorHandler("user is not there",400))
+    const passwordValid= User.comparePassword(password)
+    if(!passwordValid)
+        return next(new ErrorHandler("enter correct data",400))
+    res.status(200).json({message:"success",user})
+}
+catch(error){
+    return next(new ErrorHandler(error.message,500))
+}
+})
+
+
+
 
 module.exports = router;
