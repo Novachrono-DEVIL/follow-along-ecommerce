@@ -42,10 +42,17 @@
 - This endpoint accepts user credentials (email/username and password), retrieves the corresponding user from the database, and validates the password using bcrypt.
 - If the credentials are valid, it returns a JWT token for authentication.
 
-## Milestone 8 Steps
+## Milestone 8 
 
 - Create the Card Component:
 - Design a reusable card component with props for product details (e.g., name, image, price).
 - Design the Homepage Layout:
 - Set up a grid layout or flexbox for displaying multiple cards neatly.
 
+## Milestone 9
+
+- Created the Createproduct.jsx
+- Collects product details such as name, description, category, tags, price, and stock.
+- Allows users to upload multiple images.
+- Displays a preview of uploaded images.
+- Uses useState for state management.
