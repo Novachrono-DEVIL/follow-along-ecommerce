@@ -56,3 +56,6 @@
 - Allows users to upload multiple images.
 - Displays a preview of uploaded images.
 - Uses useState for state management.
+
+## Milestone 10
+
