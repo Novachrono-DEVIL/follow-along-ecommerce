@@ -59,3 +59,7 @@
 
 ## Milestone 10
 
+- Define product schema using Mongoose (name, description, price, image URL)
+- Add validation for required fields and data types
+- Create a POST endpoint to receive and store product data in MongoDB
+
