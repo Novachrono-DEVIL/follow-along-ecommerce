@@ -63,3 +63,18 @@
 - Add validation for required fields and data types
 - Create a POST endpoint to receive and store product data in MongoDB
 
+## Milestone 11
+
+- Create an API endpoint to send all product data.
+- Fetch data from the backend.
+- Pass it to the product card component.
+- Display the data dynamically.
+
+## Milestone 13
+
+- Create an API endpoint that receives new data.
+- Use MongoDB’s update operation to modify the existing data.
+- Add an Edit button to the product card.
+- When clicked, the existing data is sent to a form.
+- Auto-fill the form with previous data.
+- Allow users to modify the data and save changes.
