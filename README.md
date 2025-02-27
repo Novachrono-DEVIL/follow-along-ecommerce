@@ -87,3 +87,7 @@
 
 ### Milestone 14
 
+- Create an API endpoint to delete a product from MongoDB using its ID.
+- Implement a delete button in the frontend on each product card.
+- Send a delete request to the backend when the button is clicked.
+
