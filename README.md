@@ -96,3 +96,17 @@
 - Uses React Router for navigation.
 - Created navigation bar.
 
+### Milestone 16 
+
+- Create a new page that displays all product data.
+- Ensure each product has a quantity selection option.
+- Add an "Add to Cart" button for each product.
+
+### Milestone 17
+
+- Modify the user schema to store cart products.
+- Create an endpoint to receive product details and store them in the database.
+- Define a cart schema to store products.
+- Implement an endpoint to receive and store product details in the cart.
+
+
