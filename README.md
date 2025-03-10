@@ -91,3 +91,11 @@
 - Implement a delete button in the frontend on each product card.
 - Send a delete request to the backend when the button is clicked.
 
+### Milestone 15
+
+- Uses React Router for navigation.
+- Created navigation bar.
+
+### Milestone 16
+
+- 

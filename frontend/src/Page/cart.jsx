@@ -1,11 +1,10 @@
 import React from 'react'
-import Nav from '../Components/nav'
-
+import Nav from '../components/nav'
 const Cart = () => {
   return (
     <div>
-      <cart />
-      <Nav />
+    cart
+    <Nav/>
     </div>
   )
 }
