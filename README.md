@@ -96,6 +96,27 @@
 - Uses React Router for navigation.
 - Created navigation bar.
 
+<<<<<<< HEAD
 ### Milestone 16
 
 - 
+=======
+### Milestone 16 
+
+- Create a new page that displays all product data.
+- Ensure each product has a quantity selection option.
+- Add an "Add to Cart" button for each product.
+
+### Milestone 17
+
+- Created the cart schema to store products
+
+### Milestone 18
+
+- Created an Backend endpoint for cart page
+- An endpoint to get products inside cart for user
+
+
+
+
+>>>>>>> bfde206c00c3a4e72300901cf14f958b08d53ef0
