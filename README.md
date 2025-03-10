@@ -104,9 +104,13 @@
 
 ### Milestone 17
 
-- Modify the user schema to store cart products.
-- Create an endpoint to receive product details and store them in the database.
-- Define a cart schema to store products.
-- Implement an endpoint to receive and store product details in the cart.
+- Created the cart schema to store products
+
+### Milestone 18
+
+- Created an Backend endpoint for cart page
+- An endpoint to get products inside cart for user
+
+
 
 
