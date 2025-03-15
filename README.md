@@ -96,11 +96,6 @@
 - Uses React Router for navigation.
 - Created navigation bar.
 
-<<<<<<< HEAD
-### Milestone 16
-
-- 
-=======
 ### Milestone 16 
 
 - Create a new page that displays all product data.
@@ -116,7 +111,8 @@
 - Created an Backend endpoint for cart page
 - An endpoint to get products inside cart for user
 
+### Milestone 19
 
-
-
->>>>>>> bfde206c00c3a4e72300901cf14f958b08d53ef0
+- Created cart frontend page and display the products
+- For each product added an option to increase and decrease quantity using + and - buttons.
+- Created an Backend endpoint for increase and decrease quantity
