@@ -1,109 +1,77 @@
 const express = require('express');
-const { upload } = require('../multer');
-const User = require('../model/user');
+const { upload } = require('../multer.js');
+const User = require('../Model/user.js');
 const path = require('path');
 const fs = require('fs');
 const ErrorHandler = require('../utils/ErrorHandler.js');
-const jwt = require('jsonwebtoken');
-const sendMail = require('../utils/mail');
-const sendToken = require('../utils/jwtToken'); 
-const {isAuthenticated}=require('../middleware/auth.js')
+
 
 
 
 const router = express.Router();
 
 router.post("/create-user", upload.single("file"), async (req, res, next) => {
-   try{ const { name, email, password } = req.body;
-
-    // Check if the user already exists
-    const userEmail = await User.findOne({ email });
-    if (userEmail) {
+    try {
+      const { name, email, password } = req.body;
+      const avatar = req.file ? req.file.filename : null;
+  
+      // Check if the user already exists
+      const userEmail = await User.findOne({ email });
+      if (userEmail) {
+        // If user exists and there was a file uploaded, delete the uploaded file
         if (req.file) {
-            const filePath = path.join(__dirname, '..', 'uploads', req.file.filename);
-            if (fs.existsSync(filePath)) {
-                fs.unlinkSync(filePath);
-            }
+          const filePath = path.join(__dirname, '..', 'uploads', req.file.filename);
+          if (fs.existsSync(filePath)) {
+            fs.unlinkSync(filePath);
+          }
         }
-       
         return next(new ErrorHandler("User already exists", 400));
-    }
-    if (!req.file) {
+      }
+  
+      // Ensure that a file was uploaded (optional: only allow images or specific types)
+      if (!req.file) {
         return next(new ErrorHandler("No file uploaded", 400));
-    }
-    // Get the uploaded file information
-    const fileName = req.file.filename;
-
-    // Assuming files are uploaded in an 'uploads' directory
-    const fileUrl = path.join(__dirname, '..', 'uploads', fileName);  // Adjust path accordingly
-
-    // Create the new user object
-    const user = {
-        name: name,
-        email: email,
-        password:password,
+      }
+  
+      // Get the uploaded file's filename
+      const fileName = req.file.filename;
+  
+      // URL to access the file on the front end
+      const fileUrl = `/uploads/${fileName}`;
+  
+      // Create the new user object
+      const newUser = new User({
+        name,
+        email,
+        password, // You need to hash this password before saving to the database
         avatar: {
-             id: fileName,  // You can store filename as ID (or use cloud storage)
-        url: `/uploads/${fileName}`
+          id: fileName,  // You can store filename or use something like a cloud storage URL
+          url: fileUrl,
         }
-    };
-    console.log(user)
-const activationToken = createActivationToken(user)
-const activationUrl=`${process.env.FRONTEND_URL}/activation/${activationToken}`
-
-try{
-await sendMail({
-    email:user.email,
-    subject:"Activate your account",
-    message:`hello ${user.name} click on the link to activate your account ${activationUrl}`
-})
-res.status(201).json({
-    success:true,
-    message:"Account created successfully, please check your email to activate your account"
-})}
-catch(error){
-    return next(new ErrorHandler(error.message,500))
-
-}}
-     catch (error) {
-         return next(new ErrorHandler(error.message, 400));
-     }
-});
-
-const createActivationToken = (user) => {
- //   const payload = { user };
-    return jwt.sign(user, process.env.ACTIVATION_SECRET, { expiresIn: 300 });
-}
+      });
+  
+      // Save the user to the database
+      await newUser.save();
+  
+      // Send the response
+      res.status(201).json({
+        message: "User created successfully!",
+        user: {
+          name: newUser.name,
+          email: newUser.email,
+          avatar: newUser.avatar,
+          createdAt: newUser.createdAt,
+        }
+      });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: 'Internal server error', error: error.message });
+    }
+  });
 
 
 
-router.post("/activate", async (req, res, next) => {
-try{
-    const {activationToken}=req.body
-    console.log(activationToken)
-const newUser=jwt.verify(activationToken,process.env.ACTIVATION_SECRET)
-if(!newUser){
-    return next(new ErrorHandler("Invalid token or token expired",400))
-}
-const {name,email,password,avatar}=newUser
-let users = await User.findOne({email})
-if(users)
-    return next(new ErrorHandler("User already exist",400))
-const user=await User.create({
-    name,
-    email,
-    password,
-    avatar
 
-
-})
-
-sendToken(user,200,res)}
-catch(error){
-    return next(new ErrorHandler(error.message,500))
-}
-
-})
 
 
 router.post('/login-user' , async(req,res,next)=>{
@@ -128,21 +96,6 @@ sendToken(user,201,res)
 
 
 
-router.get('/getuser',isAuthenticated, async(req,res,next)=>{
-    try{
-     const user = await User.findById(req.user.id)
-     if(!user){
-        return next(new ErrorHandler("User dosent exist",400))
-     }
-      res.status(200).json({
-        success:true,
-        user,
-      }) 
-    }
-    catch(error){
-        return next(new ErrorHandler(error.message,500))
-    }
-})
 
 
 
