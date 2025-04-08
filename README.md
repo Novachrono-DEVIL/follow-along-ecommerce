@@ -148,3 +148,17 @@
 - Next we will display the address user selected to deliver
 - Display the total value of the cart
 - Place order button at the bottom.
+
+### Milestone 25
+
+- Create an endpoint that will receive the products, user, address details
+- Storing order details in mongodb order collection
+
+### Milestone 26
+
+- Created an endpoint that will receive the user mail.
+
+### Milestone 27
+
+- Created an my-orders page
+- Added my-orders page in navbar for better navigation
