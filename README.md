@@ -199,10 +199,16 @@
 
 - In Login page we will use Dispatch method to store the mail inside global state
 - In all the remaining pages acc the mail stored in global state using useSelector
-- 
+
 ### Milestone 33
 
 - Download jsonwebtoken package using NPM
 - Use sign method to create an JWT token with mail and ID
 - Give maxAge to set expire time
 - Add the cookie inside the response that helps you to store the cookie inside browser.
+
+### Milestone 34
+
+- Get the token from the browser cookie and send it to the server
+- In backend  an middleware function to validate that JWT token
+- Made sure that this steps will happen so that user cannot go to that page with out login
